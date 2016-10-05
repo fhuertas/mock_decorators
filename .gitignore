@@ -1,3 +1,8 @@
 update.sh
 # IntelliJ files
+
+.idea
+env
+# Python temporal files
 __pycache__
+*.egg-info
