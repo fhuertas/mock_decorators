@@ -1,0 +1,2 @@
+class ObjectMock:
+    pass

@@ -1,6 +1,3 @@
-from mock_decorators import utils
-
-
 class ClassMock(object):
     """
     This class is a object mock decorator
@@ -37,11 +34,12 @@ class ClassMock(object):
                     # Setting the new methods
                     setattr(old_class, method_name, new_method)
             try:
-                f(*args, **kwargs)
+                result = f(*args, **kwargs)
             finally:
                 # Restore methods changed
                 for method_name in old_methods:
                     setattr(old_class, method_name, old_methods.get(method_name))
+            return result
 
         wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
 

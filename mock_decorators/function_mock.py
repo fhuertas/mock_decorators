@@ -116,10 +116,11 @@ class FunctionMockChangeResult(object):
             setattr(self.entity, self.function_name, self.my_call)
             try:
 
-                f(*args, **kwargs)
+                result = f(*args, **kwargs)
             finally:
                 # Needed although the execution has failed
                 setattr(self.entity, self.function_name, self.old_function)
+            return result
 
         wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
 
