@@ -3,7 +3,7 @@ from mock_decorators import utils
 
 class FunctionMock(object):
     """
-    This class is a function decorator
+    This class is a function decorator. This replace the function for other function. The signature can be changed
     """
 
     def __init__(self, entity, function_name, mocked_function, check_signature=True):
@@ -45,7 +45,7 @@ class FunctionMock(object):
 
 class FunctionMockResult(object):
     """
-    This class is a function decorator
+    This class is a function decorator, This function return directly the result
     """
 
     def __init__(self, entity, function_name, result, checkExists=True):
@@ -68,7 +68,7 @@ class FunctionMockResult(object):
         it a single argument, which is the function object.
         """
 
-        def test_wrapped_f(*args, **kwargs):
+        def wrapped_f(*args, **kwargs):
             old_function = getattr(self.entity, self.function_name)
             if self.checkExists and old_function is None:
                 raise TypeError("the function don't exist")
@@ -80,14 +80,15 @@ class FunctionMockResult(object):
                 setattr(self.entity, self.function_name, old_function)
             return result
 
-        # wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
+        wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
 
-        return test_wrapped_f
+        return wrapped_f
 
 
 class FunctionMockChangeResult(object):
     """
-    This class is a function decorator
+    This mock modify the result after it is called. It is like a post condition. The post condition function should have
+    one argument
     """
 
     def __init__(self, entity, function_name, fn):
