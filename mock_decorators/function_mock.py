@@ -37,10 +37,7 @@ class FunctionMock(object):
             except:
                 raise
             finally:
-                if old_function is None:
-                    delattr(self.entity, self.function_name)
-                else:
-                    setattr(self.entity, self.function_name, old_function)
+                setattr(self.entity, self.function_name, old_function)
             return result
 
         wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
