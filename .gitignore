@@ -8,3 +8,7 @@ __pycache__
 *.egg-info
 *.pyc
 .coverage
+
+# package files
+dist
+build

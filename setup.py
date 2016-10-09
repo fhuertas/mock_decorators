@@ -1,20 +1,26 @@
+import os
 from setuptools import setup
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 required = []
 
-setup(name='mock_decorator',
-      version="1.0",
+setup(name='mock_decorators',
+      version=read('VERSION'),
       author="Francisco Huertas",
-      author_email="fhuertas@gmail.com",
+      author_email="pacohuertas@gmail.com",
       license="Apache2",
       packages=["mock_decorators"],
-      description='Mock decorator for python tests',
-      url='https://github.com/fhuertas/mock_decorator',
+      long_description=read('README.md'),
+      url='https://github.com/fhuertas/mock_decorators',
       install_requires=required,
       classifiers=[
-          "Development Status :: 3 - Alpha",
+          "Development Status :: 5 - Production/Stable",
           "Topic :: Utilities",
-          "License :: OSI Approved :: Apache 2",
+          "License :: OSI Approved :: Apache Software License",
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
