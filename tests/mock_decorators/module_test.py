@@ -6,6 +6,9 @@ a_parameter = 10
 
 
 class TestClass:
+    def __init__(self):
+        pass
+
     mocked = False
 
     def function_echo(self, *args, **kwargs):
