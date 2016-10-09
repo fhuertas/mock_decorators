@@ -11,8 +11,6 @@ class ClassMock(object):
         If there are decorator arguments, the function
         to be decorated is not passed to the constructor!
         """
-        if sys.version_info <= (3, 0):
-            raise AssertionError("Class mock not support python 2.*. Current version: {}".format(sys.version))
 
         self.old_class_name = old_class_name
         self.new_class = new_class

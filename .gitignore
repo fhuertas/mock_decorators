@@ -7,4 +7,4 @@ env*
 __pycache__
 *.egg-info
 *.pyc
-
+.coverage

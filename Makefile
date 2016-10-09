@@ -16,3 +16,5 @@ test-clean:
 clean:
 	bin/clean.sh
 
+test-version2-3:
+	bin/test-versions.sh
