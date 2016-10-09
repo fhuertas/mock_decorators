@@ -1,6 +1,7 @@
 import unittest
 from mock_decorators.attribute_mock import AttributeMock
 from tests.mock_decorators import module_test
+import sys
 
 
 class TestAttributeMock(unittest.TestCase):
@@ -29,5 +30,8 @@ class TestAttributeMock(unittest.TestCase):
         result_mocked = inner_test()
 
         self.assertEqual(result_mocked, changed_result)
-
-        self.assertRaisesRegex(AttributeError, 'other_parameter', inner_test2)
+        print(sys.version)
+        if sys.version_info < (3, 0):
+            self.assertRaisesRegexp(AttributeError, 'other_parameter', inner_test2)
+        else:
+            self.assertRaisesRegex(AttributeError, 'other_parameter', inner_test2)

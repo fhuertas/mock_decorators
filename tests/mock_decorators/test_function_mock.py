@@ -1,3 +1,4 @@
+import sys
 import unittest
 from mock_decorators.function_mock import FunctionMock
 from mock_decorators.function_mock import FunctionMockResult
@@ -55,7 +56,10 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             module_test.function_sum(self.p1, self.p2)
 
-        self.assertRaisesRegex(TypeError, "signature", inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaisesRegexp(TypeError, "signature", inner_test)
+        else:
+            self.assertRaisesRegex(TypeError, "signature", inner_test)
 
     def test_function_mock_not_exists(self):
         def function_mocked(param, param_b):
@@ -66,7 +70,10 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             module_test.function_suma(self.p1, self.p2)
 
-        self.assertRaisesRegex(TypeError, "unsupported callable", inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaises(TypeError, inner_test)
+        else:
+            self.assertRaisesRegex(TypeError, "unsupported callable", inner_test)
 
     def test_function_mock_bad_signature_no_checked(self):
         def function_mocked(param, param_b):
@@ -94,7 +101,10 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             pass
 
-        self.assertRaises(TypeError, 'unsupported callable', inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaises(TypeError, inner_test)
+        else:
+            self.assertRaisesRegex(TypeError, 'unsupported callable', inner_test)
 
 
 class TestFunctionMockResult(unittest.TestCase):
@@ -116,7 +126,10 @@ class TestFunctionMockResult(unittest.TestCase):
         def inner_test():
             return module_test.function_sum(1, 1)
 
-        self.assertRaisesRegex(TypeError, "the function don't exist", inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaisesRegexp(TypeError, "the function don't exist", inner_test)
+        else:
+            self.assertRaisesRegex(TypeError, "the function don't exist", inner_test)
 
     def test_function_mock_result_correct_no_exist_no_checked(self):
         result_returned = -21231
@@ -140,7 +153,10 @@ class TestFunctionMockResult(unittest.TestCase):
 
             call_test()
 
-        self.assertRaisesRegex(AttributeError, invalid_function_name, inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaisesRegexp(AttributeError, invalid_function_name, inner_test)
+        else:
+            self.assertRaisesRegex(AttributeError, invalid_function_name, inner_test)
 
 
 class TestFunctionMockChangeResult(unittest.TestCase):
@@ -169,7 +185,11 @@ class TestFunctionMockChangeResult(unittest.TestCase):
 
         @FunctionMockChangeResult(module_test, 'function_sum', function_change)
         def inner_test():
-            self.assertRaisesRegex(TypeError, 'positional arguments but 1 was given',
+            if sys.version_info < (3, 0):
+                self.assertRaisesRegexp(TypeError, 'takes no arguments',
+                                   module_test.function_sum, self.first_parameter, self.second_parameter)
+            else:
+                self.assertRaisesRegex(TypeError, 'positional arguments but 1 was given',
                                    module_test.function_sum, self.first_parameter, self.second_parameter)
 
         inner_test()
@@ -187,4 +207,7 @@ class TestFunctionMockChangeResult(unittest.TestCase):
 
             call_test()
 
-        self.assertRaisesRegex(AttributeError, invalid_function_name, inner_test)
+        if sys.version_info < (3, 0):
+            self.assertRaisesRegexp(AttributeError, invalid_function_name, inner_test)
+        else:
+            self.assertRaisesRegex(AttributeError, invalid_function_name, inner_test)

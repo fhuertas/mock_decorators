@@ -6,4 +6,5 @@ env*
 # Python temporal files
 __pycache__
 *.egg-info
+*.pyc
 
