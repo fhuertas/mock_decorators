@@ -25,6 +25,5 @@ fi
 
 export COVERAGE_FILE=.coverage
 $TEST_DIR/bin/nosetests --verbosity=3 --with-coverage --cover-erase --cover-package=mock_decorators tests
-#$TEST_DIR/bin/nosetests --verbosity=3 --cover-erase --cover-package=mock_decorators tests
 $TEST_DIR/bin/coverage xml
-rm -Rf .coverage coverage.xml
+rm .coverage
