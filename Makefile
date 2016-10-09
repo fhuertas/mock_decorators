@@ -18,3 +18,6 @@ clean:
 
 test-version2-3:
 	bin/test-versions.sh
+
+package: clean env
+	bin/package.sh
