@@ -53,7 +53,20 @@ class TestFunctionMock(unittest.TestCase):
         @FunctionMock(entity=module_test, function_name='function_sum', mocked_function=function_mocked,
                       check_signature=True)
         def inner_test():
-            self.assertRaisesRegex(TypeError, "signature", module_test.function_sum, self.p1, self.p2)
+            module_test.function_sum(self.p1, self.p2)
+
+        self.assertRaisesRegex(TypeError, "signature", inner_test)
+
+    def test_function_mock_not_exists(self):
+        def function_mocked(param, param_b):
+            return param - param_b
+
+        @FunctionMock(entity=module_test, function_name='function_suma', mocked_function=function_mocked,
+                      check_signature=True)
+        def inner_test():
+            module_test.function_sum(self.p1, self.p2)
+
+        self.assertRaisesRegex(TypeError, "signature", inner_test)
 
     def test_function_mock_bad_signature_no_checked(self):
         def function_mocked(param, param_b):
@@ -88,7 +101,27 @@ class TestFunctionMockResult(unittest.TestCase):
     def test_function_mock_result_correct(self):
         result_returned = -21231
 
-        @FunctionMockResult(module_test, 'function_sum', result_returned)
+        @FunctionMockResult(module_test, 'function_sum', result_returned, True)
+        def inner_test():
+            return module_test.function_sum(1, 1)
+
+        result_value_mocked = inner_test()
+
+        self.assertTrue(result_value_mocked, result_returned)
+
+    def test_function_mock_result_correct_no_exist(self):
+        result_returned = -21231
+
+        @FunctionMockResult(module_test, 'function_suma', result_returned, True)
+        def inner_test():
+            return module_test.function_sum(1, 1)
+
+        self.assertRaisesRegex(TypeError, "the function don't exist", inner_test)
+
+    def test_function_mock_result_correct_no_exist_no_checked(self):
+        result_returned = -21231
+
+        @FunctionMockResult(module_test, 'function_suma', result_returned, False)
         def inner_test():
             return module_test.function_sum(1, 1)
 

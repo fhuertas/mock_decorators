@@ -30,12 +30,17 @@ class FunctionMock(object):
             except AttributeError:
                 old_function = None
 
-            if self.check_signature:
-                utils.test_signature(old_function, self.mocked_function)
             try:
+                if self.check_signature:
+                    utils.test_signature(old_function, self.mocked_function)
                 result = f(*args, **kwargs)
+            except:
+                raise
             finally:
-                setattr(self.entity, self.function_name, old_function)
+                if old_function is None:
+                    delattr(self.entity, self.function_name)
+                else:
+                    setattr(self.entity, self.function_name, old_function)
             return result
 
         wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
