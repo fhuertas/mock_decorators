@@ -14,8 +14,11 @@ you can replace 2.6 for the version as you want to test. Note that you must be i
 ## Change log: 
 
 **1.0**:
+
 * Created the mocks, documentation.
+
 **1.0.1**:
+
 * Revise compatibility of ClassMock in python 2.7
 * Update with coverage report
 
