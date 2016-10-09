@@ -64,9 +64,9 @@ class TestFunctionMock(unittest.TestCase):
         @FunctionMock(entity=module_test, function_name='function_suma', mocked_function=function_mocked,
                       check_signature=True)
         def inner_test():
-            module_test.function_sum(self.p1, self.p2)
+            module_test.function_suma(self.p1, self.p2)
 
-        self.assertRaisesRegex(TypeError, "signature", inner_test)
+        self.assertRaisesRegex(TypeError, "unsupported callable", inner_test)
 
     def test_function_mock_bad_signature_no_checked(self):
         def function_mocked(param, param_b):
