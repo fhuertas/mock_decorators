@@ -16,7 +16,8 @@ setup(name='mock_decorators',
       packages=["mock_decorators"],
       description="Mock library using python decorators",
       long_description=read('README.md'),
-      url='https://github.com/fhuertas/mock_decorators',
+      url='https://github.com/fhuertas/mock_decorators'
+      download_url="https://github.com/fhuertas/mock_decorators/tarball/{}".format(read('VERSION')),
       install_requires=required,
       classifiers=[
           "Development Status :: 5 - Production/Stable",
