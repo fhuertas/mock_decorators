@@ -26,7 +26,7 @@ you can replace 2.6 for the version as you want to test. Note that you must be i
 ## Installation
 
 This module can be installed using the following command
-* master: `pip install git+git://github.com/ansible/ansible.git (for master version)`
+* master: `pip install git+https://github.com/fhuertas/mock_decorators (for master version)`
 * For the last stable version, visit [here](https://github.com/fhuertas/mock_decorators/releases) and download it. Then execute `pip install <downloaded_package>`
 
 ## Usage
