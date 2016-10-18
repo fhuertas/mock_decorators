@@ -22,12 +22,15 @@ you can replace 2.6 for the version as you want to test. Note that you must be i
 * Revise compatibility of ClassMock in python 2.7
 * Update with coverage report
 
+**1.0.2-1.0.4**
+* Improved python 2 compatibility
+* Adapted to Pypi public repository
 
 ## Installation
 
-This module can be installed using the following command
-* master: `pip install git+https://github.com/fhuertas/mock_decorators (for master version)`
-* For the last stable version, visit [here](https://github.com/fhuertas/mock_decorators/releases) and download it. Then execute `pip install <downloaded_package>`
+This module can be installed using the following options:
+* From Pypi, using the following command `pip install mock_decorators`
+* From respository: `pip install git+https://github.com/fhuertas/mock_decorators (for master version)`
 
 ## Usage
 
@@ -35,7 +38,7 @@ The tests contain examples to use this library but here there are the more usefu
 
 ### FunctionMock
 
-This mock replace a function for other. [Example](https://github.com/fhuertas/mock_decorators/blob/v1.0.3/tests/mock_decorators/test_function_mock.py#L18) 
+This mock replace a function for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.4/tests/mock_decorators/test_function_mock.py#L18) 
 
 The parameters are the following: 
 
@@ -46,7 +49,7 @@ The parameters are the following:
  
 ### FunctionMockResult
 
-This mock replace a function for a result value. [Example](https://github.com/fhuertas/mock_decorators/blob/v1.0.3/tests/mock_decorators/test_function_mock.py#L114)
+This mock replace a function for a result value. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.4/tests/mock_decorators/test_function_mock.py#L114)
 
 The parameters are the following: 
 
@@ -58,7 +61,7 @@ The parameters are the following:
 ### FunctionMockChangeResult
 
 This mock modify the result of a function. i.e. if Add 2 to a result of a function. 
-[Example](https://github.com/fhuertas/mock_decorators/blob/v1.0.3/tests/mock_decorators/test_function_mock.py#L18)
+[Example](https://github.com/fhuertas/mock_decorators/blob/1.0.4/tests/mock_decorators/test_function_mock.py#L18)
 
 The parameters are the following:
 * **entity**: The module, class or object where the function is.
@@ -67,7 +70,7 @@ The parameters are the following:
 
 ## AttributeMock
 
-This mock change the value of a attribute for other. [Example](https://github.com/fhuertas/mock_decorators/blob/v1.0.3/tests/mock_decorators/test_attribute_mock.py#L8)
+This mock change the value of a attribute for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.4/tests/mock_decorators/test_attribute_mock.py#L8)
 
 The parameters are the following: 
 
@@ -78,7 +81,7 @@ The parameters are the following:
 
 ## ClassMock
 
-This mock only work in python 3 and higher. This mock replace a class or object by other. [Example](https://github.com/fhuertas/mock_decorators/blob/v1.0.3/tests/mock_decorators/test_class_mock.py#L24) 
+This mock only work in python 3 and higher. This mock replace a class or object by other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.4/tests/mock_decorators/test_class_mock.py#L24) 
 
 The parameters are the following
 * **old_class_name**: The original object/class that you can replace
