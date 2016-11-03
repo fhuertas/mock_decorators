@@ -20,3 +20,8 @@ class TestClass:
     @classmethod
     def class_function(cls):
         return False
+
+a_dict = {
+    'value_a': 22,
+    'value_b': None,
+}
