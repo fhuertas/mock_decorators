@@ -6,12 +6,16 @@ class ClassMock(object):
     This class is a object mock decorator
     """
 
+    min_version = (3, 0)
+
     def __init__(self, old_class_name, new_class):
         """
         If there are decorator arguments, the function
         to be decorated is not passed to the constructor!
         """
-
+        if sys.version_info < self.min_version:
+            raise Exception('ClassMock is not compatible with this version: {}.\n Minimum version: {}'
+                            .format(sys.version, self.min_version))
         self.old_class_name = old_class_name
         self.new_class = new_class
 

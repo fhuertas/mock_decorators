@@ -22,6 +22,9 @@ class MockedClass:
 
 class TestClassMock(unittest.TestCase):
     def test_mock_class_creation(self):
+        if sys.version_info < ClassMock.min_version:
+            self.skipTest("This test is for python version {} or higher".format(ClassMock.min_version))
+
         @ClassMock(TestClass, MockedClass)
         def inner_test():
             return TestClass()
@@ -32,6 +35,9 @@ class TestClassMock(unittest.TestCase):
         self.assertFalse(no_mocked_class.mocked)
 
     def test_mock_class_static_method(self):
+        if sys.version_info < ClassMock.min_version:
+            self.skipTest("This test is for python version {} or higher".format(ClassMock.min_version))
+
         @ClassMock(TestClass, MockedClass)
         def inner_test():
             return TestClass.class_function()
@@ -40,6 +46,8 @@ class TestClassMock(unittest.TestCase):
         self.assertFalse(TestClass.class_function(), "The no mocked class is mocked")
 
     def test_mock_class_class_method(self):
+        if sys.version_info < ClassMock.min_version:
+            self.skipTest("This test is for python version {} or higher".format(ClassMock.min_version))
         no_mocked_object = TestClass()
 
         @ClassMock(TestClass, MockedClass)
@@ -49,3 +57,14 @@ class TestClassMock(unittest.TestCase):
 
         self.assertTrue(inner_test(), "The mocked object is not mocked")
         self.assertFalse(no_mocked_object.class_function(), "The no object class is mocked")
+
+    def test_mock_invalid_class(self):
+        if sys.version_info > ClassMock.min_version:
+            self.skipTest("This test is for python version minor than {} ".format(ClassMock.min_version))
+
+        def inner_test():
+            @ClassMock(TestClass, MockedClass)
+            def inner_function():
+                pass
+
+        self.assertRaises(Exception, inner_test)

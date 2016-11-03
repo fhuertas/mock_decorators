@@ -16,7 +16,7 @@ test-clean:
 clean:
 	bin/clean.sh
 
-test-version2-3:
+test-versions:
 	bin/test-versions.sh
 
 package: clean env
