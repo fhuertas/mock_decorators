@@ -264,3 +264,13 @@ class TestFunctionMockCheckCall(unittest.TestCase):
         result_no_change = module_test.function_sum(2, 2)
         self.assertEqual(result_change, 3, "The function result has been modified")
         self.assertEqual(result_no_change, 4, "The function result has been modified")
+
+    def test_call_change_return_0(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', expected_times=1, return_value=0)
+        def inner_test():
+            return module_test.function_sum(2, 2)
+
+        result_change = inner_test()
+        result_no_change = module_test.function_sum(2, 2)
+        self.assertEqual(result_change, 0, "The function result has been modified")
+        self.assertEqual(result_no_change, 4, "The function result has been modified")

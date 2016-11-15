@@ -1,6 +1,6 @@
 PYTHON_VERSION=
 PYTHON_ENV_TEST=env-test$(PYTHON_VERSION)
-all: clean env tests
+all: clean env test-versions package
 
 env: env/bin/activate
 
