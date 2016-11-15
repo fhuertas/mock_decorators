@@ -234,7 +234,7 @@ class TestFunctionMockCheckCall(unittest.TestCase):
         self.assertEqual(result, 4, "The function result has been modified")
 
     def test_call_check_invocations_ok(self):
-        @FunctionMockCheckCall(module_test, 'function_sum', 3)
+        @FunctionMockCheckCall(module_test, 'function_sum', expected_times=3)
         def inner_test():
             module_test.function_sum(2, 2)
             module_test.function_sum(2, 2)
@@ -245,7 +245,7 @@ class TestFunctionMockCheckCall(unittest.TestCase):
         self.assertEqual(result, 4, "The function result has been modified")
 
     def test_call_check_invocations_ko(self):
-        @FunctionMockCheckCall(module_test, 'function_sum', 2)
+        @FunctionMockCheckCall(module_test, 'function_sum', expected_times=2)
         def inner_test():
             module_test.function_sum(2, 2)
             module_test.function_sum(2, 2)
@@ -274,3 +274,18 @@ class TestFunctionMockCheckCall(unittest.TestCase):
         result_no_change = module_test.function_sum(2, 2)
         self.assertEqual(result_change, 0, "The function result has been modified")
         self.assertEqual(result_no_change, 4, "The function result has been modified")
+
+    def test_check_no_call_ok(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', expected_times=0)
+        def inner_test():
+            return 3
+
+        result_no_change = module_test.function_sum(2, 2)
+        self.assertEqual(result_no_change, 4, "The function result has been modified")
+
+    def test_check_no_call_ko(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', expected_times=0)
+        def inner_test():
+            return module_test.function_sum(2, 2)
+
+        self.assertRaises(ValueError, inner_test)
