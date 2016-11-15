@@ -147,7 +147,7 @@ class FunctionMockCheckCall(object):
 
         def wrapped_mock(*args, **kwargs):
             self.times += 1
-            if return_value:
+            if return_value is not None:
                 return return_value
             return self.old_function(*args, **kwargs)
 
