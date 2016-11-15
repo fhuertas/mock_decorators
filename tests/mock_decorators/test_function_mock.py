@@ -3,6 +3,7 @@ import unittest
 from mock_decorators.function_mock import FunctionMock
 from mock_decorators.function_mock import FunctionMockResult
 from mock_decorators.function_mock import FunctionMockChangeResult
+from mock_decorators.function_mock import FunctionMockCheckCall
 from tests.mock_decorators import module_test
 from tests.mock_decorators.module_test import TestClass
 
@@ -187,10 +188,10 @@ class TestFunctionMockChangeResult(unittest.TestCase):
         def inner_test():
             if sys.version_info < (3, 0):
                 self.assertRaisesRegexp(TypeError, 'takes no arguments',
-                                   module_test.function_sum, self.first_parameter, self.second_parameter)
+                                        module_test.function_sum, self.first_parameter, self.second_parameter)
             else:
                 self.assertRaisesRegex(TypeError, 'positional arguments but 1 was given',
-                                   module_test.function_sum, self.first_parameter, self.second_parameter)
+                                       module_test.function_sum, self.first_parameter, self.second_parameter)
 
         inner_test()
 
@@ -211,3 +212,43 @@ class TestFunctionMockChangeResult(unittest.TestCase):
             self.assertRaisesRegexp(AttributeError, invalid_function_name, inner_test)
         else:
             self.assertRaisesRegex(AttributeError, invalid_function_name, inner_test)
+
+
+class TestFunctionMockCheckCall(unittest.TestCase):
+    def test_no_called(self):
+
+        def inner_test():
+            @FunctionMockCheckCall(module_test, 'function_sum')
+            def call_test():
+                pass
+            call_test()
+        self.assertRaises(ValueError, inner_test)
+
+    def test_called(self):
+        @FunctionMockCheckCall(module_test, 'function_sum')
+        def inner_test():
+            return module_test.function_sum(2, 2)
+
+        result = inner_test()
+        self.assertEqual(result, 4, "The function result has been modified")
+
+    def test_call_check_invocations_ok(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', 3)
+        def inner_test():
+            module_test.function_sum(2, 2)
+            module_test.function_sum(2, 2)
+            return module_test.function_sum(2, 2)
+
+        result = inner_test()
+        module_test.function_sum(2, 2)
+        self.assertEqual(result, 4, "The function result has been modified")
+
+    def test_call_check_invocations_ko(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', 2)
+        def inner_test():
+            module_test.function_sum(2, 2)
+            module_test.function_sum(2, 2)
+            return module_test.function_sum(2, 2)
+        self.assertRaises(ValueError, inner_test)
+        result = module_test.function_sum(2, 2)
+        self.assertEqual(result, 4, "The function result has been modified")

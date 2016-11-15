@@ -128,3 +128,53 @@ class FunctionMockChangeResult(object):
         wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
 
         return wrapped_f
+
+
+class FunctionMockCheckCall(object):
+    CALLED = 'called'
+    TIMES = 'times'
+
+    def __init__(self, entity, function_name, expected_times=0):
+        """
+        TODO
+        """
+        self.entity = entity
+        self.function_name = function_name
+        self.expected_times = expected_times
+        self.times = 0
+        self.old_function = None
+
+        def wrapped_mock(*args, **kwargs):
+            self.times += 1
+            return self.old_function(*args, **kwargs)
+
+        self.new_function = wrapped_mock
+
+    def __call__(self, f):
+        """
+        If there are decorator arguments, __call__() is only called
+        once, as part of the decoration process! You can only give
+        it a single argument, which is the function object.
+        """
+
+        def wrapped_f(*args, **kwargs):
+
+            self.old_function = getattr(self.entity, self.function_name)
+            setattr(self.entity, self.function_name, self.new_function)
+
+            try:
+                result = f(*args, **kwargs)
+            finally:
+                if self.old_function:
+                    setattr(self.entity, self.function_name, self.old_function)
+                if not self.times:
+                    raise ValueError("The function {} has not been called. ".format(self.function_name))
+                if self.expected_times and self.expected_times != self.times:
+                    raise ValueError("The function {} has been called {} times instead {}. "
+                                     .format(self.function_name, self.times, self.expected_times))
+
+            return result
+
+        wrapped_f.__name__ = '{}_{}'.format(f.__name__, wrapped_f.__name__)
+
+        return wrapped_f
