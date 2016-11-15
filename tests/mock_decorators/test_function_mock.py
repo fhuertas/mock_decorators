@@ -216,12 +216,13 @@ class TestFunctionMockChangeResult(unittest.TestCase):
 
 class TestFunctionMockCheckCall(unittest.TestCase):
     def test_no_called(self):
-
         def inner_test():
             @FunctionMockCheckCall(module_test, 'function_sum')
             def call_test():
                 pass
+
             call_test()
+
         self.assertRaises(ValueError, inner_test)
 
     def test_called(self):
@@ -249,6 +250,17 @@ class TestFunctionMockCheckCall(unittest.TestCase):
             module_test.function_sum(2, 2)
             module_test.function_sum(2, 2)
             return module_test.function_sum(2, 2)
+
         self.assertRaises(ValueError, inner_test)
         result = module_test.function_sum(2, 2)
         self.assertEqual(result, 4, "The function result has been modified")
+
+    def test_call_change_return(self):
+        @FunctionMockCheckCall(module_test, 'function_sum', return_value=3)
+        def inner_test():
+            return module_test.function_sum(2, 2)
+
+        result_change = inner_test()
+        result_no_change = module_test.function_sum(2, 2)
+        self.assertEqual(result_change, 3, "The function result has been modified")
+        self.assertEqual(result_no_change, 4, "The function result has been modified")

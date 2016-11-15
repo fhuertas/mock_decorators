@@ -134,9 +134,10 @@ class FunctionMockCheckCall(object):
     CALLED = 'called'
     TIMES = 'times'
 
-    def __init__(self, entity, function_name, expected_times=0):
+    def __init__(self, entity, function_name, expected_times=0, return_value=None):
         """
-        TODO
+        This function checks if a function is invoked and the times that it is called. Optionally, the mock can return
+        a value instead invoke the function
         """
         self.entity = entity
         self.function_name = function_name
@@ -146,6 +147,8 @@ class FunctionMockCheckCall(object):
 
         def wrapped_mock(*args, **kwargs):
             self.times += 1
+            if return_value:
+                return return_value
             return self.old_function(*args, **kwargs)
 
         self.new_function = wrapped_mock
