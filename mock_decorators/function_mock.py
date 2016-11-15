@@ -131,10 +131,7 @@ class FunctionMockChangeResult(object):
 
 
 class FunctionMockCheckCall(object):
-    CALLED = 'called'
-    TIMES = 'times'
-
-    def __init__(self, entity, function_name, expected_times=0, return_value=None):
+    def __init__(self, entity, function_name, return_value=None, expected_times=None):
         """
         This function checks if a function is invoked and the times that it is called. Optionally, the mock can return
         a value instead invoke the function
@@ -170,11 +167,12 @@ class FunctionMockCheckCall(object):
             finally:
                 if self.old_function:
                     setattr(self.entity, self.function_name, self.old_function)
-                if not self.times:
-                    raise ValueError("The function {} has not been called. ".format(self.function_name))
-                if self.expected_times and self.expected_times != self.times:
-                    raise ValueError("The function {} has been called {} times instead {}. "
-                                     .format(self.function_name, self.times, self.expected_times))
+
+            if self.expected_times is None and not self.times:
+                raise ValueError("The function {} has not been called.".format(self.function_name))
+            elif self.expected_times is not None and self.expected_times != self.times:
+                raise ValueError("The function {} has been called {} times instead {}. "
+                                 .format(self.function_name, self.times, self.expected_times))
 
             return result
 

@@ -38,7 +38,9 @@ where <python-version> is the version to test. Note: you must be installed that 
 * FunctionMockCheckCall can return a value instead invoke the function
 
 **1.0.8**
+* FunctionMockCheckCall now check 0 invocations
 * Fix: FunctionMockCheckCall checks if the value to return is None and not a condition
+* Fix: the checks in the FunctionMockCheckCall
 
 ## Installation
 
