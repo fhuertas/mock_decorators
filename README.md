@@ -34,6 +34,9 @@ where <python-version> is the version to test. Note: you must be installed that 
 * Added mock for check if a function is called
 * FIX: `make test-versions` makes tests for python 2 and 3
 
+**1.0.7**
+* FunctionMockCheckCall can return a value instead invoke the function
+
 ## Installation
 
 This module can be installed using the following options:
@@ -46,7 +49,7 @@ The tests contain examples to use this library but here there are the more usefu
 
 ### FunctionMock
 
-This mock replace a function for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_function_mock.py#L18) 
+This mock replace a function for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_function_mock.py#L18) 
 
 The parameters are the following: 
 
@@ -57,7 +60,7 @@ The parameters are the following:
  
 ### FunctionMockResult
 
-This mock replace a function for a result value. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_function_mock.py#L167)
+This mock replace a function for a result value. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_function_mock.py#L167)
 
 The parameters are the following: 
 
@@ -69,7 +72,7 @@ The parameters are the following:
 ### FunctionMockChangeResult
 
 This mock modify the result of a function. i.e. if Add 2 to a result of a function. 
-[Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_function_mock.py#L220)
+[Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_function_mock.py#L220)
 
 The parameters are the following:
 * **entity**: The module, class or object where the function is.
@@ -79,16 +82,17 @@ The parameters are the following:
 ### FunctionMockCheckCall
 
 This mock modify the result of a function. i.e. if Add 2 to a result of a function. 
-[Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_function_mock.py#L18)
+[Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_function_mock.py#L18)
 
 The parameters are the following:
 * **entity**: The module, class or object where the function is.
 * **function_name**: The function where you can modify the result 
-* **times** (*optional, 0 by default*): Expected number times that the function should be called. 0 not check it
+* **expected_times** (*optional, 0 by default*): Expected number times that the function should be called. 0 not check it
+* **return_value** (*optional, None by default*): Return a value instead call to the function, if None, the function is called
 
 ## AttributeMock
 
-This mock change the value of a attribute for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_attribute_mock.py#L8)
+This mock change the value of a attribute for other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_attribute_mock.py#L8)
 
 The parameters are the following: 
 
@@ -99,7 +103,7 @@ The parameters are the following:
 
 ## ClassMock
 
-This mock only work in python 3 and higher. This mock replace a class or object by other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_class_mock.py#L24) 
+This mock only work in python 3 and higher. This mock replace a class or object by other. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_class_mock.py#L24) 
 
 The parameters are the following:
 * **old_class_name**: The original object/class that you can replace
@@ -108,7 +112,7 @@ The parameters are the following:
 
 ## DictMock
 
-This mock replace a value in a map by other value. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.6/tests/mock_decorators/test_dict_mock.py#L7) 
+This mock replace a value in a map by other value. [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.7/tests/mock_decorators/test_dict_mock.py#L7) 
 
 The parameters are the following:
 * **entity_dict**: The original dictionary
