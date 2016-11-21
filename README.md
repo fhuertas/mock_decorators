@@ -86,13 +86,13 @@ The parameters are the following:
 
 ### FunctionMockCheckCall
 
-This mock modify the result of a function. i.e. if Add 2 to a result of a function. 
+This mock checks if a function is called or not and optionally the times that it is called. By default the function is invoked but instead a value can be returned
 [Example](https://github.com/fhuertas/mock_decorators/blob/1.0.9/tests/mock_decorators/test_function_mock.py#L18)
 
 The parameters are the following:
 * **entity**: The module, class or object where the function is.
 * **function_name**: The function where you can modify the result 
-* **expected_times** (*optional, 0 by default*): Expected number times that the function should be called. 0 not check it
+* **expected_times** (*optional, None by default*): Expected number times that the function should be called. None checks if the function is called but not the times that it is invoked
 * **return_value** (*optional, None by default*): Return a value instead call to the function, if None, the function is called
 
 ## AttributeMock
