@@ -131,7 +131,7 @@ The parameters are the following:
 
 ## MockIoRedirect
 
-This mock catch the system output in a Stream. It is desirable that it is a StringIO. [Example](https://github.com/fhuertas/mock_decorators/blob/1.1.0/tests/mock_decorators/test_mock_sys_output.py#L21) 
+This mock catch the system output in a Stream. It is desirable that it is a StringIO. [Example](https://github.com/fhuertas/mock_decorators/blob/1.1.0/tests/mock_decorators/test_mock_sys_output.py#L27) 
  
 The parameters are the following:
 * **text_io_wrapper**: The stream where the output will be saved
