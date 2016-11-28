@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/fhuertas/mock_decorators.svg?branch=master)](https://travis-ci.org/fhuertas/mock_decorators)
 # Python decorators for mocking
 
 This module contains a set of decorators that allow to mock functions. (Replacing the behavior of a method, attribute, object or class)
