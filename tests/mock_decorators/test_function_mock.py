@@ -57,7 +57,7 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             module_test.function_sum(self.p1, self.p2)
 
-        if sys.version_info < (3, 0):
+        if sys.version_info < (3, 4):
             self.assertRaisesRegexp(TypeError, "signature", inner_test)
         else:
             self.assertRaisesRegex(TypeError, "signature", inner_test)
@@ -71,7 +71,7 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             module_test.function_suma(self.p1, self.p2)
 
-        if sys.version_info < (3, 0):
+        if sys.version_info < (3, 4):
             self.assertRaises(TypeError, inner_test)
         else:
             self.assertRaisesRegex(TypeError, "unsupported callable", inner_test)
@@ -102,7 +102,7 @@ class TestFunctionMock(unittest.TestCase):
         def inner_test():
             pass
 
-        if sys.version_info < (3, 0):
+        if sys.version_info < (3, 4):
             self.assertRaises(TypeError, inner_test)
         else:
             self.assertRaisesRegex(TypeError, 'unsupported callable', inner_test)
@@ -127,7 +127,7 @@ class TestFunctionMockResult(unittest.TestCase):
         def inner_test():
             return module_test.function_sum(1, 1)
 
-        if sys.version_info < (3, 0):
+        if sys.version_info < (3, 3):
             self.assertRaisesRegexp(TypeError, "the function don't exist", inner_test)
         else:
             self.assertRaisesRegex(TypeError, "the function don't exist", inner_test)
