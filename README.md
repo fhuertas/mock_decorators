@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/fhuertas/mock_decorators.svg?branch=master)](https://travis-ci.org/fhuertas/mock_decorators)
+[![Coverage Status](https://coveralls.io/repos/github/fhuertas/mock_decorators/badge.svg?branch=master)](https://coveralls.io/github/fhuertas/mock_decorators?branch=master)
 # Python decorators for mocking
 
 This module contains a set of decorators that allow to mock functions. (Replacing the behavior of a method, attribute, object or class)

@@ -1,2 +1,1 @@
-class ObjectMock:
-    pass
+class ObjectMock: pass
