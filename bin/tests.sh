@@ -28,4 +28,3 @@ $TEST_DIR/bin/nosetests --verbosity=3 --with-coverage --cover-package=mock_decor
 $TEST_DIR/bin/coverage xml
 echo "Total report"
 $TEST_DIR/bin/coverage report
-#rm .coverage
