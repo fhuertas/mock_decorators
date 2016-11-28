@@ -25,28 +25,38 @@ where <python-version> is the version to test. Note: you must be installed that 
 * Update with coverage report
 
 **1.0.2-1.0.4**
+
 * Improved python 2 compatibility
 * Adapted to Pypi public repository
 
 **1.0.5**
+
 * Added Mocks for dictionaries
 * FIX: now ClassMock is reported correctly that it doesn't work in python 2
 
 **1.0.6**
+
 * Added mock for check if a function is called
 * FIX: `make test-versions` makes tests for python 2 and 3
 
 **1.0.7**
+
 * FunctionMockCheckCall can return a value instead invoke the function
 
 **1.0.9**
+
 * FunctionMockCheckCall now check 0 invocations
 * Fix: FunctionMockCheckCall checks if the value to return is None and not a condition
 * Fix: the checks in the FunctionMockCheckCall
 
 **1.1.0**
+
 * New Mock. MockSysOutput catch the system output in a Stream 
 * Fix documentation of FunctionMockCheckCall
+
+**1.1.1**
+
+* Add coverage information 
 
 ## Installation
 
