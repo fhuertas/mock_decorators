@@ -64,6 +64,8 @@ This module can be installed using the following options:
 * From Pypi, using the following command `pip install mock_decorators`
 * From respository: `pip install git+https://github.com/fhuertas/mock_decorators (for master version)`
 
+This module can be imported in requirements.txt or setup.py
+
 ## Usage
 
 The tests contain examples to use this library but here there are the more useful examples: 
